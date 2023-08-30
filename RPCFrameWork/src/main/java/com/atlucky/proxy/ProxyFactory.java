@@ -1,11 +1,15 @@
 package com.atlucky.proxy;
 
 import com.atlucky.common.Invocation;
+import com.atlucky.common.URL;
+import com.atlucky.loadbalance.LoadBalance;
 import com.atlucky.protocol.http.HttpClient;
+import com.atlucky.register.MapRemoteRegister;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
+import java.util.List;
 
 /**
  * 代理工厂
@@ -26,7 +30,16 @@ public class ProxyFactory {
                         method.getParameterTypes(),
                         args);
                 HttpClient httpClient = new HttpClient();
-                String result = httpClient.send("localhost", 9999, sayHello);
+
+                //  注册中心   服务发现
+                List<URL> remoteRegister =
+                        MapRemoteRegister.getRemoteRegister(classInterfaceClass.getName());
+
+                //负载均衡
+                URL url = LoadBalance.getRandom(remoteRegister);
+
+                //服务发送 调用
+                String result = httpClient.send(url.getHostName(), url.getPort() , sayHello);
                 System.out.println(result);
                 return result;
             }
