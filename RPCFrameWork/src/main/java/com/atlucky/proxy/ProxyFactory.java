@@ -5,6 +5,7 @@ import com.atlucky.common.URL;
 import com.atlucky.loadbalance.LoadBalance;
 import com.atlucky.protocol.http.HttpClient;
 import com.atlucky.register.MapRemoteRegister;
+import org.apache.tomcat.util.buf.StringUtils;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
@@ -26,6 +27,15 @@ public class ProxyFactory {
         Object newProxyInstance = Proxy.newProxyInstance(classInterfaceClass.getClassLoader(), new Class[]{classInterfaceClass}, new InvocationHandler() {
             @Override
             public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+                //Mock
+                String mock = System.getProperty("mock");
+
+                if (mock !=null && mock.startsWith("return:")){
+                    String result = mock.replace("return:", "");
+                    return result;
+                }
+
+
                 Invocation sayHello = new Invocation(classInterfaceClass.getName(),
                         method.getName(),
                         method.getParameterTypes(),
