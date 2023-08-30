@@ -9,6 +9,7 @@ import com.atlucky.register.MapRemoteRegister;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -35,12 +36,15 @@ public class ProxyFactory {
                 List<URL> remoteRegister =
                         MapRemoteRegister.getRemoteRegister(classInterfaceClass.getName());
 
-                //负载均衡
-                URL url = LoadBalance.getRandom(remoteRegister);
+                ArrayList<URL> invocatedUrls = new ArrayList<>();
 
                 //服务发送 调用
                 String result=null;
                 try {
+                    //负载均衡
+                    invocatedUrls.remove(classInterfaceClass);
+                    URL url = LoadBalance.getRandom(remoteRegister);
+                    invocatedUrls.add(url);
                     result = httpClient.send(url.getHostName(), url.getPort() , sayHello);
                     System.out.println(result);
                     return result;
