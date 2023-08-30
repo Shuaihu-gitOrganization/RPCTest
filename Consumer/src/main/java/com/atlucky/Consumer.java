@@ -16,7 +16,7 @@ public class Consumer {
         HelloService helloService= ProxyFactory.getProxy(HelloService.class);
         String sayHello = helloService.sayHello("atLucky");
 
-
+        System.out.println(sayHello);
 
     }
 }

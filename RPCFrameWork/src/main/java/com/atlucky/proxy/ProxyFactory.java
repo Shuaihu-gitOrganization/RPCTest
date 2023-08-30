@@ -39,9 +39,14 @@ public class ProxyFactory {
                 URL url = LoadBalance.getRandom(remoteRegister);
 
                 //服务发送 调用
-                String result = httpClient.send(url.getHostName(), url.getPort() , sayHello);
-                System.out.println(result);
-                return result;
+                String result=null;
+                try {
+                    result = httpClient.send(url.getHostName(), url.getPort() , sayHello);
+                    System.out.println(result);
+                    return result;
+                }catch (Exception e){
+                    return "请求发生错误";
+                }
             }
         });
 
