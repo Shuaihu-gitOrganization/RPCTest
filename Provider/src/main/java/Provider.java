@@ -14,6 +14,6 @@ public class Provider {
 
         //Netty、Tomcat接收网络请求
         HttpServer httpServer = new HttpServer();
-        httpServer.start("localhost",8080);
+        httpServer.start("localhost",9999);
     }
 }

@@ -12,7 +12,6 @@ import java.io.Serializable;
  * @Author XiaoHu
  * @Description
  **/
-@Slf4j
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
