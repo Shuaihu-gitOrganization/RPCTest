@@ -39,20 +39,30 @@ public class ProxyFactory {
                 ArrayList<URL> invocatedUrls = new ArrayList<>();
 
                 //服务发送 调用
-                String result=null;
-                try {
+                String result = null;
+                int max = 3;
+                while (max > 0) {
                     //负载均衡
                     invocatedUrls.remove(classInterfaceClass);
                     URL url = LoadBalance.getRandom(remoteRegister);
                     invocatedUrls.add(url);
-                    result = httpClient.send(url.getHostName(), url.getPort() , sayHello);
-                    System.out.println(result);
-                    return result;
-                }catch (Exception e){
-                    return "请求发生错误";
+                    try {
+
+
+                        result = httpClient.send(url.getHostName(), url.getPort(), sayHello);
+                        System.out.println(result);
+
+                    } catch (Exception e) {
+                        if (max-- != 0) continue;
+                        //error-callback = HelloServiceErrorBack
+                        //容错
+                        return "请求发生错误";
+                    }
                 }
+                return result;
             }
         });
+
 
         return (T) newProxyInstance;
 
