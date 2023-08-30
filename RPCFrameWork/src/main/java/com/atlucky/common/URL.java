@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.apache.tomcat.util.net.jsse.PEMFile;
 
+import java.io.Serializable;
+
 /**
  * @Date 2023/8/30 16:10
  * @Author XiaoHu
@@ -13,7 +15,7 @@ import org.apache.tomcat.util.net.jsse.PEMFile;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class URL {
+public class URL implements Serializable {
     private String hostName;
     private Integer port;
 
