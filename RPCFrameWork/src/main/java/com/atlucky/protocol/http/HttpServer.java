@@ -1,6 +1,6 @@
 package com.atlucky.protocol.http;
 
-import jdk.swing.interop.DispatcherWrapper;
+import com.atlucky.protocol.http.servlet.DispatcherServlet;
 import org.apache.catalina.*;
 import org.apache.catalina.connector.Connector;
 import org.apache.catalina.core.StandardContext;
@@ -43,7 +43,8 @@ public class HttpServer {
          service.setContainer(engine);
          service.addConnector(connector);
 
-         //tomcat.addServlet(contextPath,"disPatcher",new DispatcherServlet())
+         tomcat.addServlet(contextPath,"disPatcher",new DispatcherServlet());
+         context.addServletMappingDecoded("/*","disPatcher");
 
         try {
             tomcat.start();
