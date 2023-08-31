@@ -58,7 +58,7 @@ public class ProxyFactory {
                     invocatedUrls.add(url);
                     try {
 
-
+                        //RPC协议
                         result = httpClient.send(url.getHostName(), url.getPort(), sayHello);
                         System.out.println(result);
 
@@ -66,7 +66,7 @@ public class ProxyFactory {
                         if (max-- != 0) continue;
                         //error-callback = HelloServiceErrorBack
                         //容错
-                        return "请求发生错误";
+                        return "请求发生错误,服务端连接超时";
                     }
                 }
                 return result;
