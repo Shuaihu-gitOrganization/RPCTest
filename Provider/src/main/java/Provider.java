@@ -14,6 +14,10 @@ import java.util.List;
  **/
 public class Provider {
     public static void main(String[] args) {
+        //启动 相关服务器  Tomcat 、Netty、Jetty 接收消费应用发来相关请求
+
+        //读取用户的hostname、port配置
+
         //本地注册
         LocalRegister.register(HelloService.class.getName(),"1.0" ,HelloServiceImpl.class);
 

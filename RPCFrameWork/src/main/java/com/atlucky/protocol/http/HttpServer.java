@@ -15,7 +15,8 @@ import org.apache.catalina.startup.Tomcat;
  **/
 public class HttpServer {
     public void start(String hostname,Integer port){
-        //读取用户的配置
+        //读取用户的配置 读取Tomcat、Netty、Jetty相关配置
+        //不管是使用-D还是使用配置文件，默认使用Tomcat
         Tomcat tomcat = new Tomcat();
 
         Server server = tomcat.getServer();
@@ -43,6 +44,7 @@ public class HttpServer {
          service.setContainer(engine);
          service.addConnector(connector);
 
+         //Servlet容器 处理请求
          tomcat.addServlet(contextPath,"disPatcher",new DispatcherServlet());
          context.addServletMappingDecoded("/*","disPatcher");
 

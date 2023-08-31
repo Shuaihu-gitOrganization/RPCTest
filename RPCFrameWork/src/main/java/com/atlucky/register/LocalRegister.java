@@ -6,7 +6,7 @@ import java.util.Map;
 /**
  * @Date 2023/8/30 14:53
  * @Author XiaoHu
- * @Description
+ * @Description 本地注册
  **/
 public class LocalRegister {
     public static Map<String,Class> map=new HashMap<String,Class>();

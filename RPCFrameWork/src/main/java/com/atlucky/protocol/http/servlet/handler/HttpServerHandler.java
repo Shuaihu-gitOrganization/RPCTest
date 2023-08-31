@@ -24,8 +24,11 @@ public class HttpServerHandler {
         try {
             Invocation invocation  =(Invocation) new ObjectInputStream( req.getInputStream()).readObject();
             String interfaceName = invocation.getInterfaceName();
+            //根据消费者应用传过来的接口名通过反射机制拿到接口实现类
             Class classImpl = LocalRegister.getRegister(interfaceName,"1.0");
+            //根据实现类反射拿到实现方法 动态代理
             Method method = classImpl.getMethod(invocation.getMethodName(), invocation.getParameterTypes());
+            //执行具体的方法 动态代理
             String  result = (String) method.invoke(classImpl.newInstance(), invocation.getParameters());
 
             //写到响应请求之中

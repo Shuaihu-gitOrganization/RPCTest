@@ -18,6 +18,7 @@ public class DispatcherServlet extends HttpServlet {
 
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        //读取用户的请求配置
         //处理请求
         new HttpServerHandler().handler(req,resp);
         //super.service(req, resp);

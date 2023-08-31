@@ -13,7 +13,9 @@ import lombok.extern.slf4j.Slf4j;
  **/
 public class Consumer {
     public static void main(String[] args) {
+        //调用RPC中的动态代理
         HelloService helloService= ProxyFactory.getProxy(HelloService.class);
+
         String sayHello = helloService.sayHello("atLucky");
 
         System.out.println(sayHello);
