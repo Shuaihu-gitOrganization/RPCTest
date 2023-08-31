@@ -14,7 +14,7 @@ import java.net.URLConnection;
 /**
  * @Date 2023/8/30 15:19
  * @Author XiaoHu
- * @Description
+ * @Description 客户端发送请求
  **/
 public class HttpClient {
     public String send(String hostName, Integer port, Invocation invocation){
@@ -22,12 +22,13 @@ public class HttpClient {
 
         HttpURLConnection urlConnection;
         try {
+            //配置
             URL url = new URL("http", hostName, port, "/");
             urlConnection = (HttpURLConnection) url.openConnection();
             urlConnection.setRequestMethod("POST");
             urlConnection.setDoOutput(true);
 
-            //配置
+
             OutputStream outputStream = urlConnection.getOutputStream();
             ObjectOutputStream stream = new ObjectOutputStream(outputStream);
             stream.writeObject(invocation);

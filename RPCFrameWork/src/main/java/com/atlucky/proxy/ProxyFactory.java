@@ -39,7 +39,7 @@ public class ProxyFactory {
                 Invocation sayHello = new Invocation(classInterfaceClass.getName(),
                         method.getName(),
                         method.getParameterTypes(),
-                        args);
+                        args);//可传版本
                 HttpClient httpClient = new HttpClient();
 
                 //  注册中心   服务发现
@@ -51,7 +51,7 @@ public class ProxyFactory {
                 //服务发送 调用
                 String result = null;
                 int max = 3;
-                while (max > 0) {
+                while (max > 0) {//服务重试
                     //负载均衡
                     invocatedUrls.remove(classInterfaceClass);
                     URL url = LoadBalance.getRandom(remoteRegister);
