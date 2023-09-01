@@ -9,9 +9,10 @@ import domain.User;
  * @Author XiaoHu
  * @Description
  **/
-public class HelloServiceImpl implements HelloService {
+public class UserServiceImpl implements  UserService {
+
     @Override
-    public String sayHello(String name) {
-        return "Hello :" + name;
+    public String getUser(User user) {
+        return user.toString();
     }
 }

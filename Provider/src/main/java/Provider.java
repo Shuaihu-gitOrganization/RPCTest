@@ -3,8 +3,10 @@ import com.atlucky.protocol.http.HttpServer;
 import com.atlucky.register.LocalRegister;
 import com.atlucky.register.MapRemoteRegister;
 import com.common.HelloService;
+import com.common.UserService;
 import service.implement.HelloServiceImpl;
-import service.implement.HelloServiceImplV2;
+import service.implement.UserServiceImpl;
+
 
 import java.util.List;
 
@@ -21,12 +23,14 @@ public class Provider {
         //Spring——>Spring容器——>执行
         //本地注册
         LocalRegister.register(HelloService.class.getName(),"1.0" ,HelloServiceImpl.class);
-        LocalRegister.register(HelloService.class.getName(),"2.0" , HelloServiceImplV2.class);
+        LocalRegister.register(UserService.class.getName(),"1.0" , UserServiceImpl.class);
+      //  LocalRegister.register(HelloService.class.getName(),"2.0" , HelloServiceImplV2.class);
 
 
         //注册中心   服务注册
         URL url = new URL("localhost", 9999);
         MapRemoteRegister.remoteRegister(HelloService.class.getName(),url);
+        MapRemoteRegister.remoteRegister(UserService.class.getName(),url);
 
         //Netty、Tomcat接收网络请求
         HttpServer httpServer = new HttpServer();

@@ -60,7 +60,7 @@ public class ProxyFactory {
 
                         //RPC协议
                         result = httpClient.send(url.getHostName(), url.getPort(), sayHello);
-                        System.out.println(result);
+                       // System.out.println(result);
 
                     } catch (Exception e) {
 //                        if (max-- != 0) continue;

@@ -34,6 +34,7 @@ public class HttpServerHandler {
             //写到响应请求之中
             IOUtils.write(result,resp.getOutputStream());
 
+
         } catch (IOException e ) {
             throw new RuntimeException(e);
         } catch (ClassNotFoundException e) {
